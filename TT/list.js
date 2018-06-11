@@ -11,6 +11,8 @@ exports.handler = function (event, context, callback) {
 		"body": ""
 	}
 
+	console.log(event);
+
 	ddb.get({
 		TableName: 'mypeople',
 		Key: { 'username': event.queryParameters.username }
