@@ -11,17 +11,21 @@ exports.handler = function (event, context, callback) {
 		"body": ""
 	}
 
-	console.log(event);
-
 	ddb.get({
 		TableName: 'mypeople',
 		Key: { 'username': event.queryStringParameters.username }
 	}, function (err, data) {
-	
+
 		if (err) {
+			response.statusCode = 500;
 			response.body = "Error in fetching user with username";
 		} else {
-			response.body = JSON.stringify(data.Item);
+			if (data.Item) {
+				response.body = JSON.stringify(data.Item);
+			}else{
+				response.statusCode = 404;
+				response.body = "No such user";
+			}
 		}
 		callback(null, response);
 	});
