@@ -7,8 +7,6 @@ exports.handler = function (event, context, callback) {
 		TableName: 'mypeople',
 		Item: { 'username': event.username, 'firstName': event.firstName, 'lastName': event.lastName, 'age': event.age }
 	}, function (err, data) {
-
-
 		callback(err, data);
 	});
 
